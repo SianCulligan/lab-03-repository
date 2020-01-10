@@ -33,7 +33,7 @@ Image.prototype.render = function() {
 };
 
 Image.readJson = (path) => {
-  let pageLocation = '';
+  // let pageLocation = '';
   $.ajax(path,'json')
     .then(imgData => {
       console.log(imgData);
@@ -64,9 +64,10 @@ $(() => Image.readJson('../data/page-1.json'));
 // populate the dropdown with our keywords
 // write a function that responds to users click
 // when clicked, all images w/ keywords are .show, everything else is .hide
+let keywordFilter = [];
 
 function renderList () {
-  let keywordFilter = [];
+  keywordFilter = [];
   imgArr.forEach((keywordCheck) => {
     if(!keywordFilter.includes(keywordCheck.keyword)) {
       // console.log(keywordCheck.keyword);
@@ -152,16 +153,29 @@ function renderList () {
 
 $('#pageTwo' ).on('click', function (e) {
   e.preventDefault();
+  imgArr = [];
+  keywordFilter = [];
   $('div').remove();
+  $('option').remove();
+  $('select option').append(`<option>${defaultOption}</option>`);
   let pathTwo = '../data/page-2.json';
   Image.readJson (pathTwo);
 });
 
 
 
+$('#pageOne').on('click', function (e) {
+  e.preventDefault();
+  imgArr = [];
+  keywordFilter = [];
+  $('div').remove();
+  $('option').remove();
+  $('select option').append(`<option>${defaultOption}</option>`);
+  let pathOne = '../data/page-1.json';
+  Image.readJson (pathOne);
+});
 
-
-
+const defaultOption = 'Filter by Page One Keywords';
 
 
 
