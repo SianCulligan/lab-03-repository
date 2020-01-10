@@ -75,8 +75,6 @@ function renderList () {
       $('select').append(`<option>${keywordCheck.keyword}</option>`);
     }
   });
-
-
 }
 
 
@@ -157,12 +155,11 @@ $('#pageTwo' ).on('click', function (e) {
   keywordFilter = [];
   $('div').remove();
   $('option').remove();
-  $('select option').append(`<option>${defaultOption}</option>`);
+  $('select').prepend(`<option value="default"></option>`);
+  $('option').text('Filter by Page Two Keywords');
   let pathTwo = '../data/page-2.json';
   Image.readJson (pathTwo);
 });
-
-
 
 $('#pageOne').on('click', function (e) {
   e.preventDefault();
@@ -170,13 +167,11 @@ $('#pageOne').on('click', function (e) {
   keywordFilter = [];
   $('div').remove();
   $('option').remove();
-  $('select option').append(`<option>${defaultOption}</option>`);
+  $('select').prepend(`<option value="default"></option>`);
+  $('option').text('Filter by Page One Keywords');
   let pathOne = '../data/page-1.json';
   Image.readJson (pathOne);
 });
-
-const defaultOption = 'Filter by Page One Keywords';
-
 
 
 
