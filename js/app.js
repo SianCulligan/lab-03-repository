@@ -32,9 +32,11 @@ Image.prototype.render = function() {
   imageClone.attr('class' , this.keyword);
 };
 
-Image.readJson = () => {
-  $.ajax('../data/page-1.json','json')
+Image.readJson = (path) => {
+  let pageLocation = '';
+  $.ajax(path,'json')
     .then(imgData => {
+      console.log(imgData);
       imgData.forEach(imageItem => {
         imgArr.push(new Image(imageItem));
       });
@@ -47,7 +49,12 @@ Image.loadImage = () => {
   renderList();
 };
 
-$(() => Image.readJson());
+$(() => Image.readJson('../data/page-1.json'));
+
+
+
+
+
 
 //loop through our array to create objects
 // create a render function
@@ -62,13 +69,14 @@ function renderList () {
   let keywordFilter = [];
   imgArr.forEach((keywordCheck) => {
     if(!keywordFilter.includes(keywordCheck.keyword)) {
-      console.log(keywordCheck.keyword);
+      // console.log(keywordCheck.keyword);
       keywordFilter.push(keywordCheck.keyword);
       $('select').append(`<option>${keywordCheck.keyword}</option>`);
     }
   });
 
 
+}
 
 
 
@@ -77,13 +85,77 @@ function renderList () {
 
 
 
-
-  // check if keyword already exists (.include!!!),
-  //if not .push to the array
-  //render it to the DOM
-
+// check if keyword already exists (.include!!!),
+//if not .push to the array
+//render it to the DOM
 
 
+
+
+
+// Xbutton for page 1 & page 2
+// hide images when button 2 is clicked
+
+
+// $('#pageOne').on('click', function() {
+//   $('img').hide();
+//   $('h2').hide();
+//   $('p').hide();
+
+// });
+
+// $('#pageOne' ).on('click', function () {
+//   $('img').hide();
+//   $('h2').hide();
+//   $('p').hide();
+//   $('#pageOne').fadeIn(750);
+// });
+
+// connect the .json page file to appropriate button
+//get the images from page-2 to pass through readJson prototype
+
+
+// $('#pageTwo' ).on('click', function () {
+
+// acting on page 2 button
+// hide all images from page-1.json
+// show all images from page-2
+
+
+//   $('img').hide();
+//   $('h2').hide();
+//   $('p').hide();
+//   console.log('Hello');
+//   $(() => Image.readJsonTwo());
+//   $('img', '.pageTwo').show();
+// });
+
+
+
+
+
+
+
+
+// render function
+// Image.prototype.renderTwo = function() {
+//   $('main').append('<div class="clone"></div>');
+//   let imageClone = $('div[class="clone"]');
+//   let imageHtml = $('#photo-template').html();
+//   imageClone.html(imageHtml);
+//   imageClone.find('h2').text(this.title);
+//   imageClone.find('img').attr('src', this.image_url); imageClone.find('img').attr('alt', this.title);
+//   imageClone.find('p').text(this.description);
+//   imageClone.removeClass('clone');
+//   imageClone.attr('class' , 'pageTwo');
+// };
+
+$('#pageTwo' ).on('click', function (e) {
+  e.preventDefault();
+  $('div').remove();
+  let pathTwo = '../data/page-2.json';
+  Image.readJson (pathTwo);
+});
 
 
 
@@ -120,7 +192,7 @@ function renderList () {
 //     $listClone.attr('class', this.keyword);
 //     //find the option
 //     $listClone.find('p').text(this.keyword)
-}
+
 
 
 // Feature #2:
@@ -145,4 +217,3 @@ function renderList () {
 //   $listClone.attr('class', this.keyword);
 //   //find the option
 //   $listClone.find('p').text(this.keyword)
-// };
