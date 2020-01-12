@@ -75,5 +75,4 @@ $('#pageOne').on('click', function (e) {
   $('option').text('Filter by Page One Keywords');
   let pathOne = '../data/page-1.json';
   Image.readJson (pathOne);
-  keywordFilter.sort();
 });
