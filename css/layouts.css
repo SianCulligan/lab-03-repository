@@ -1,4 +1,23 @@
+
 img {
-    height: 150px;
-    width: 150px;
+    height: 175px;
+    width: 200px;
+    border: 2px solid black;
+}
+
+div {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    border: 4px solid black;
+    text-align: center;
+    display: inline-block;
+    margin: auto auto auto 10px;
+    text-overflow: unset;
+    overflow: scroll;
+    font-kerning: auto;
+}
+
+div:hover {
+    background-color: rgb(255, 219, 231);
 }

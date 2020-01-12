@@ -10,6 +10,7 @@ function Image (imgObject) {
   this.horns = imgObject.horns;
 }
 
+// render function
 Image.prototype.render = function() {
   $('main').append('<div class="clone"></div>');
   let imageClone = $('div[class="clone"]');
@@ -22,6 +23,7 @@ Image.prototype.render = function() {
   imageClone.attr('class' , this.keyword);
 };
 
+// generates images based on path name
 Image.readJson = (path) => {
   // let pageLocation = '';
   $.ajax(path,'json')
@@ -75,4 +77,14 @@ $('#pageOne').on('click', function (e) {
   $('option').text('Filter by Page One Keywords');
   let pathOne = '../data/page-1.json';
   Image.readJson (pathOne);
+});
+
+//filter by keyword
+keywordFilter.forEach(function(value) {
+  $('select') .append(`<option id="option_${value}">${value}</option>`);});
+
+$('select').on('change', (event) => {
+  let option = event.target.value;
+  $('div').hide();
+  $(`.${option}`).show();
 });
