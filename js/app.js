@@ -89,13 +89,15 @@ $('select').on('change', (event) => {
 
 $('input.sort').on('click', function (e) {
   e.preventDefault();
-  if ($(this).val() === 'horns') {
+  console.log(this.value);
+  if (this.value === 'horns') {
     imgArr.sort( (a,b) => {
       return b.horns - a.horns;
     });
-    $('div').show();
+
+    console.log(imgArr);
   }
-  else if ($(this).val() === 'title') {
+  else if (this.value === 'title') {
     imgArr.sort( (a, b) => {
       if (a.title > b.title) {
         return 1;
@@ -105,9 +107,7 @@ $('input.sort').on('click', function (e) {
       }
       return 0;
     });
-    //   $('div').show();
-    // }
-    // $('div').remove();
-    // Image.readJson (path);
-    return imgArr;
-  }});
+  }
+  $('div').remove();
+  Image.loadImage();
+});
