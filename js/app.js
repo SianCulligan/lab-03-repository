@@ -10,22 +10,19 @@ function Image (imgObject) {
   this.horns = imgObject.horns;
 }
 
-// render function
 Image.prototype.render = function() {
   $('main').append('<div class="clone"></div>');
-  let imageClone = $('div[class="clone"]');
+  let $imageClone = $('div[class="clone"]');
   let imageHtml = $('#photo-template').html();
-  imageClone.html(imageHtml);
-  imageClone.find('h2').text(this.title);
-  imageClone.find('img').attr('src', this.image_url); imageClone.find('img').attr('alt', this.title);
-  imageClone.find('p').text(this.description);
-  imageClone.removeClass('clone');
-  imageClone.attr('class' , this.keyword);
+  $imageClone.html(imageHtml);
+  $imageClone.find('h2').text(this.title);
+  $imageClone.find('img').attr('src', this.image_url); $imageClone.find('img').attr('alt', this.title);
+  $imageClone.find('p').text(this.description);
+  $imageClone.removeClass('clone');
+  $imageClone.attr('class' , this.keyword);
 };
 
-// generates images based on path name
 Image.readJson = (path) => {
-  // let pageLocation = '';
   $.ajax(path,'json')
     .then(imgData => {
       console.log(imgData);
@@ -88,3 +85,29 @@ $('select').on('change', (event) => {
   $('div').hide();
   $(`.${option}`).show();
 });
+
+
+$('input.sort').on('click', function (e) {
+  e.preventDefault();
+  if ($(this).val() === 'horns') {
+    imgArr.sort( (a,b) => {
+      return b.horns - a.horns;
+    });
+    $('div').show();
+  }
+  else if ($(this).val() === 'title') {
+    imgArr.sort( (a, b) => {
+      if (a.title > b.title) {
+        return 1;
+      }
+      if (a.title < b.title) {
+        return -1;
+      }
+      return 0;
+    });
+    //   $('div').show();
+    // }
+    // $('div').remove();
+    // Image.readJson (path);
+    return imgArr;
+  }});

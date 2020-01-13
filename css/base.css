@@ -4,4 +4,11 @@ body {
 
 div {
     background-color: lavenderblush;
+} 
+
+main body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
 }
