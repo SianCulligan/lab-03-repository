@@ -10,17 +10,25 @@ function Image (imgObject) {
   this.horns = imgObject.horns;
 }
 
-Image.prototype.render = function() {
-  $('main').append('<div class="clone"></div>');
-  let $imageClone = $('div[class="clone"]');
-  let imageHtml = $('#photo-template').html();
-  $imageClone.html(imageHtml);
-  $imageClone.find('h2').text(this.title);
-  $imageClone.find('img').attr('src', this.image_url); $imageClone.find('img').attr('alt', this.title);
-  $imageClone.find('p').text(this.description);
-  $imageClone.removeClass('clone');
-  $imageClone.attr('class' , this.keyword);
+// Image.prototype.render = function() {
+//   $('main').append('<div class="clone"></div>');
+//   let $imageClone = $('div[class="clone"]');
+//   let imageHtml = $('#photo-template').html();
+//   $imageClone.html(imageHtml);
+//   $imageClone.find('h2').text(this.title);
+//   $imageClone.find('img').attr('src', this.image_url); $imageClone.find('img').attr('alt', this.title);
+//   $imageClone.find('p').text(this.description);
+//   $imageClone.removeClass('clone');
+//   $imageClone.attr('class' , this.keyword);
+// };
+
+Image.prototype.create = function() {
+  let source = $('#photo-template').html();
+  let template = Handlebars.compile(source);
+  return template(this);
 };
+
+
 
 Image.readJson = (path) => {
   $.ajax(path,'json')
@@ -34,7 +42,11 @@ Image.readJson = (path) => {
 };
 
 Image.loadImage = () => {
-  imgArr.forEach(imgObject => imgObject.render());
+  console.log('!!', imgArr);
+  imgArr.forEach(horn => {
+    console.log('!!', horn);
+    $('#generateImages').append(horn.create());
+  });
   renderList();
 };
 
