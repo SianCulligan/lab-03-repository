@@ -10,25 +10,11 @@ function Image (imgObject) {
   this.horns = imgObject.horns;
 }
 
-// Image.prototype.render = function() {
-//   $('main').append('<div class="clone"></div>');
-//   let $imageClone = $('div[class="clone"]');
-//   let imageHtml = $('#photo-template').html();
-//   $imageClone.html(imageHtml);
-//   $imageClone.find('h2').text(this.title);
-//   $imageClone.find('img').attr('src', this.image_url); $imageClone.find('img').attr('alt', this.title);
-//   $imageClone.find('p').text(this.description);
-//   $imageClone.removeClass('clone');
-//   $imageClone.attr('class' , this.keyword);
-// };
-
 Image.prototype.create = function() {
   let source = $('#photo-template').html();
   let template = Handlebars.compile(source);
   return template(this);
 };
-
-
 
 Image.readJson = (path) => {
   $.ajax(path,'json')
@@ -62,8 +48,8 @@ function renderList () {
       $('select').append(`<option>${keywordCheck.keyword}</option>`);
     }
   });
-
 }
+
 $('#pageTwo' ).on('click', function (e) {
   e.preventDefault();
   imgArr = [];
@@ -98,7 +84,6 @@ $('select').on('change', (event) => {
   $(`.${option}`).show();
 });
 
-
 $('input.sort').on('click', function (e) {
   e.preventDefault();
   console.log(this.value);
@@ -123,3 +108,15 @@ $('input.sort').on('click', function (e) {
   $('div').remove();
   Image.loadImage();
 });
+
+// Image.prototype.render = function() {
+//   $('main').append('<div class="clone"></div>');
+//   let $imageClone = $('div[class="clone"]');
+//   let imageHtml = $('#photo-template').html();
+//   $imageClone.html(imageHtml);
+//   $imageClone.find('h2').text(this.title);
+//   $imageClone.find('img').attr('src', this.image_url); $imageClone.find('img').attr('alt', this.title);
+//   $imageClone.find('p').text(this.description);
+//   $imageClone.removeClass('clone');
+//   $imageClone.attr('class' , this.keyword);
+// };
